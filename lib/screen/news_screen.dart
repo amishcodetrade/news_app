@@ -22,7 +22,7 @@ class NewsListState extends State<NewsList> {
 
   Future<NewsApiResponse> fetchNews() async {
     final response = await http.get(Uri.parse(
-        'https://newsapi.org/v2/everything?q=tesla&from=2023-08-25&sortBy=publishedAt&apiKey=758e3f700a494a82a9f5a68fa0409751'));
+        'https://newsapi.org/v2/everything?q=tesla&from=2023-08-26&sortBy=publishedAt&apiKey=758e3f700a494a82a9f5a68fa0409751'));
     if (response.statusCode == 200) {
       NewsApiResponse newsApiResponse =
           NewsApiResponse.fromJson(json.decode(response.body));
@@ -37,7 +37,7 @@ class NewsListState extends State<NewsList> {
 
   Future<void> updateAppWidget(List<String> articleTitles) async {
     await HomeWidget.saveWidgetData<String>(
-        'news_titles', json.encode(articleTitles));
+        'news_titles', json.encode(articleTitles[0]));
     await HomeWidget.updateWidget(
         name: 'HomeScreenWidgetProvider', iOSName: 'HomeScreenWidgetProvider');
   }
